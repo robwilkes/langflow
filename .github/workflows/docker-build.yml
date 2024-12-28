@@ -177,11 +177,15 @@ jobs:
             fi
           fi
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runner }}
     needs: [get-version, setup]
     strategy:
       matrix:
-        platform: [linux/amd64, linux/arm64]
+        include:
+          - platform: linux/amd64
+            runner: ubuntu-latest
+          - platform: linux/arm64
+            runner: macos-latest
     steps:
       - name: Check out the code at a specific ref
         uses: actions/checkout@v4
