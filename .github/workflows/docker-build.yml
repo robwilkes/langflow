@@ -50,7 +50,7 @@ on:
 
 env:
   POETRY_VERSION: "1.8.2"
-  TEST_TAG: "langflowai/langflow:test"
+  TEST_TAG: "robwilkes/langflow:test"
 
 jobs:
   get-version:
@@ -152,23 +152,23 @@ jobs:
 
           if [[ "${{ inputs.release_type }}" == "base" || "${{ inputs.release_type }}" == "nightly-base" ]]; then
             # LANGFLOW-BASE RELEASE
-            echo "docker_tags=langflowai/langflow${nightly_suffix}:base-${{ needs.get-version.outputs.version }},langflowai/langflow${nightly_suffix}:base-latest,langflowai/langflow${nightly_suffix}:base-${{ needs.get-version.outputs.version }}-amd64,langflowai/langflow${nightly_suffix}:base-${{ needs.get-version.outputs.version }}-arm64,langflowai/langflow${nightly_suffix}:base-latest-amd64,langflowai/langflow${nightly_suffix}:base-latest-arm64" >> $GITHUB_OUTPUT
+            echo "docker_tags=robwilkes/langflow${nightly_suffix}:base-${{ needs.get-version.outputs.version }},robwilkes/langflow${nightly_suffix}:base-latest,robwilkes/langflow${nightly_suffix}:base-${{ needs.get-version.outputs.version }}-amd64,robwilkes/langflow${nightly_suffix}:base-${{ needs.get-version.outputs.version }}-arm64,robwilkes/langflow${nightly_suffix}:base-latest-amd64,robwilkes/langflow${nightly_suffix}:base-latest-arm64" >> $GITHUB_OUTPUT
             echo "ghcr_tags=ghcr.io/langflow-ai/langflow${nightly_suffix}:base-${{ needs.get-version.outputs.version }},ghcr.io/langflow-ai/langflow${nightly_suffix}:base-latest,ghcr.io/langflow-ai/langflow${nightly_suffix}:base-${{ needs.get-version.outputs.version }}-amd64,ghcr.io/langflow-ai/langflow${nightly_suffix}:base-${{ needs.get-version.outputs.version }}-arm64,ghcr.io/langflow-ai/langflow${nightly_suffix}:base-latest-amd64,ghcr.io/langflow-ai/langflow${nightly_suffix}:base-latest-arm64" >> $GITHUB_OUTPUT
             echo "file=./docker/build_and_push_base.Dockerfile" >> $GITHUB_OUTPUT
           else
             if [[ "${{ inputs.pre_release }}" == "true" ]]; then
               # LANGFLOW-MAIN PRE-RELEASE
-              echo "docker_tags=langflowai/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }},langflowai/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }}-amd64,langflowai/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }}-arm64" >> $GITHUB_OUTPUT
+              echo "docker_tags=robwilkes/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }},robwilkes/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }}-amd64,robwilkes/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }}-arm64" >> $GITHUB_OUTPUT
               echo "ghcr_tags=ghcr.io/langflow-ai/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }},ghcr.io/langflow-ai/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }}-amd64,ghcr.io/langflow-ai/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }}-arm64" >> $GITHUB_OUTPUT
               echo "file=./docker/build_and_push.Dockerfile" >> $GITHUB_OUTPUT
             elif [[ "${{ inputs.release_type }}" == "main-ep" ]]; then
               # LANGFLOW-MAIN (ENTRYPOINT) RELEASE
-              echo "docker_tags=langflowai/langflow-ep${nightly_suffix}:${{ needs.get-version.outputs.version }},langflowai/langflow-ep${nightly_suffix}:latest,langflowai/langflow-ep${nightly_suffix}:${{ needs.get-version.outputs.version }}-amd64,langflowai/langflow-ep${nightly_suffix}:${{ needs.get-version.outputs.version }}-arm64,langflowai/langflow-ep${nightly_suffix}:latest-amd64,langflowai/langflow-ep${nightly_suffix}:latest-arm64" >> $GITHUB_OUTPUT
+              echo "docker_tags=robwilkes/langflow-ep${nightly_suffix}:${{ needs.get-version.outputs.version }},robwilkes/langflow-ep${nightly_suffix}:latest,robwilkes/langflow-ep${nightly_suffix}:${{ needs.get-version.outputs.version }}-amd64,robwilkes/langflow-ep${nightly_suffix}:${{ needs.get-version.outputs.version }}-arm64,robwilkes/langflow-ep${nightly_suffix}:latest-amd64,robwilkes/langflow-ep${nightly_suffix}:latest-arm64" >> $GITHUB_OUTPUT
               echo "ghcr_tags=ghcr.io/langflow-ai/langflow-ep${nightly_suffix}:${{ needs.get-version.outputs.version }},ghcr.io/langflow-ai/langflow-ep${nightly_suffix}:latest,ghcr.io/langflow-ai/langflow-ep${nightly_suffix}:${{ needs.get-version.outputs.version }}-amd64,ghcr.io/langflow-ai/langflow-ep${nightly_suffix}:${{ needs.get-version.outputs.version }}-arm64,ghcr.io/langflow-ai/langflow-ep${nightly_suffix}:latest-amd64,ghcr.io/langflow-ai/langflow-ep${nightly_suffix}:latest-arm64" >> $GITHUB_OUTPUT
               echo "file=./docker/build_and_push_ep.Dockerfile" >> $GITHUB_OUTPUT
             elif [[ "${{ inputs.release_type }}" == "main" || "${{ inputs.release_type }}" == "nightly-main" ]]; then
               # LANGFLOW-MAIN RELEASE
-              echo "docker_tags=langflowai/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }},langflowai/langflow${nightly_suffix}:latest,langflowai/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }}-amd64,langflowai/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }}-arm64,langflowai/langflow${nightly_suffix}:latest-amd64,langflowai/langflow${nightly_suffix}:latest-arm64" >> $GITHUB_OUTPUT
+              echo "docker_tags=robwilkes/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }},robwilkes/langflow${nightly_suffix}:latest,robwilkes/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }}-amd64,robwilkes/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }}-arm64,robwilkes/langflow${nightly_suffix}:latest-amd64,robwilkes/langflow${nightly_suffix}:latest-arm64" >> $GITHUB_OUTPUT
               echo "ghcr_tags=ghcr.io/langflow-ai/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }},ghcr.io/langflow-ai/langflow${nightly_suffix}:latest,ghcr.io/langflow-ai/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }}-amd64,ghcr.io/langflow-ai/langflow${nightly_suffix}:${{ needs.get-version.outputs.version }}-arm64,ghcr.io/langflow-ai/langflow${nightly_suffix}:latest-amd64,ghcr.io/langflow-ai/langflow${nightly_suffix}:latest-arm64" >> $GITHUB_OUTPUT
               echo "file=./docker/build_and_push.Dockerfile" >> $GITHUB_OUTPUT
             else
@@ -248,12 +248,12 @@ jobs:
         include:
           - component: docker-backend
             dockerfile: ./docker/build_and_push_backend.Dockerfile
-            tags: langflowai/langflow-backend:${{ needs.get-version.outputs.version }},langflowai/langflow-backend:latest
-            langflow_image: langflowai/langflow:${{ needs.get-version.outputs.version }}
+            tags: robwilkes/langflow-backend:${{ needs.get-version.outputs.version }},robwilkes/langflow-backend:latest
+            langflow_image: robwilkes/langflow:${{ needs.get-version.outputs.version }}
           - component: docker-frontend
             dockerfile: ./docker/frontend/build_and_push_frontend.Dockerfile
-            tags: langflowai/langflow-frontend:${{ needs.get-version.outputs.version }},langflowai/langflow-frontend:latest
-            langflow_image: langflowai/langflow:${{ needs.get-version.outputs.version }}
+            tags: robwilkes/langflow-frontend:${{ needs.get-version.outputs.version }},robwilkes/langflow-frontend:latest
+            langflow_image: robwilkes/langflow:${{ needs.get-version.outputs.version }}
           - component: ghcr-backend
             dockerfile: ./docker/build_and_push_backend.Dockerfile
             tags: ghcr.io/langflow-ai/langflow-backend:${{ needs.get-version.outputs.version }},ghcr.io/langflow-ai/langflow-backend:latest
