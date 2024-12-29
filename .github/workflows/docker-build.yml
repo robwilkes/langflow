@@ -192,8 +192,22 @@ jobs:
         with:
           ref: ${{ inputs.ref || inputs.main_version || github.ref }}
           persist-credentials: true
+
+      - name: Set up Docker for macOS
+        if: runner.os == 'macOS'
+        run: |
+          brew install docker colima
+          colima start
+          
+          # Wait for Docker daemon to be ready
+          while ! docker system info > /dev/null 2>&1; do
+            echo "Waiting for Docker daemon..."
+            sleep 1
+          done
+
       - name: "Setup Environment"
         uses: ./.github/actions/setup-uv
+        
       - name: Install the project
         run: |
           if [[ "${{ inputs.release_type }}" == "base" || "${{ inputs.release_type }}" == "nightly-base" ]]; then
