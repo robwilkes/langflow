@@ -196,8 +196,11 @@ jobs:
       - name: Set up Docker for macOS
         if: runner.os == 'macOS'
         run: |
-          brew install docker colima
-          colima start
+          brew install docker lima
+          limactl start --name=default template://docker
+          
+          # Set DOCKER_HOST to use Lima
+          echo "DOCKER_HOST=unix://${HOME}/.lima/default/sock/docker.sock" >> $GITHUB_ENV
           
           # Wait for Docker daemon to be ready
           while ! docker system info > /dev/null 2>&1; do
